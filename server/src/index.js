@@ -16,10 +16,9 @@ app.use(artistRouter)
 app.use(authorizeRouter)
 app.use(callbackRouter)
 
-app.get('' ,(req , res) => {
-  res.send("Cookie Set")
+app.get('' , (req ,res) => {
+  res.send("Cookie")
 })
-
 app.listen(port, () => {
   console.log("Server is up on port" + port)
 })
