@@ -1,7 +1,8 @@
 const auth = (req , res , next) => {
     try{
         const access_token = req.header('Authorization').replace('Bearer ' , '')
-        console.log(access_token)
+        const refresh_token = req.header('Refresh')
+        req.refresh_token = refresh_token
         req.access_token = access_token
         next()
     }catch(e){
