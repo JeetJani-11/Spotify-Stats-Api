@@ -7,14 +7,13 @@ const refresh_access_token = async (err, refresh_token, loggedInSpotifyApi) => {
                 throw new Error()
             }
             loggedInSpotifyApi.setAccessToken(data.body['access_token'])
-            console.log("Refresh Function", data.body['access_token'])
             return { access_token: data.body['access_token'] }
         } catch (error) {
-            console.log("Refresh Function", error)
+            
             return { error }
         }
     } else {
-        console.log("dckfhg;lj", err)
+
         return err
     }
 }

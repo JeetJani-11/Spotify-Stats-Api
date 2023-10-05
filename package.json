@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server/src/index.js" ,
-    "start" : "node server/src/index.js"
+    "dev": "env-cmd -f ./server/config/dev.env nodemon server/src/index.js",
+    "start": "node server/src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +18,8 @@
     "express-session": "^1.17.3",
     "spotify-web-api-node": "^5.0.2",
     "window": "^4.2.7"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
   }
 }

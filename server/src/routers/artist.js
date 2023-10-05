@@ -5,9 +5,9 @@ const auth = require('../middleware/auth')
 const refresh_access_token = require('../utils/refreshAccessToken')
 
 let credentials = {
-  clientId: 'daa3f493706649d192c579e546334d04',
-  clientSecret: '74f77af1b7674593ac2922ee70ad6ffb',
-  redirectUri: 'http://localhost:3000/callback',
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  redirectUri: process.env.REDIRECT_URI,
 }
 let loggedInSpotifyApi = new SpotifyWebApi(credentials)
 
@@ -16,28 +16,37 @@ router.get('/artist/top', auth, (req, res) => {
     time_range: 'short_term',
     limit: 25
   }
+
   if (req.query.time_range) {
     artistObject.time_range = req.query.time_range
   }
+
   let access_token = req.access_token
   loggedInSpotifyApi.setAccessToken(access_token)
+
   loggedInSpotifyApi.getMyTopArtists(artistObject).then(function (data) {
-    let topArtists = data.body.items;
-    res.send(topArtists)
+  let topArtists = data.body.items;
+  res.send(topArtists)
+
   }, async function (err) {
+
     const body = await refresh_access_token(err.message, req.refresh_token, loggedInSpotifyApi)
+
     if (body.error) {
       return res.send({
         error: body.error.message
       })
     }
+
     loggedInSpotifyApi.getMyTopArtists(artistObject).then(function (data) {
       let topArtists = data.body.items;
       res.send(topArtists)
+
     }, function (err) {
       res.send({
         error: err.message
       })
+      
     })
   })
 })

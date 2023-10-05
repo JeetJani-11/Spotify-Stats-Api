@@ -3,8 +3,9 @@ const express = require('express')
 const router = new express.Router()
 
 let scopes = ['user-read-private', 'user-read-email', 'user-top-read', 'user-read-recently-played', 'user-read-playback-position', 'playlist-modify-private', 'playlist-read-private', 'playlist-read-collaborative', 'playlist-modify-public'],
-  redirectUri = 'http://localhost:3000/callback',
-  clientId = 'daa3f493706649d192c579e546334d04',
+
+  redirectUri = process.env.REDIRECT_URI,
+  clientId = process.env.CLIENT_ID,
   state = 'some-state-of-my-choice';
 let spotifyApi = new SpotifyWebApi({
   redirectUri: redirectUri,

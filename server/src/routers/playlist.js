@@ -5,9 +5,9 @@ const auth = require('../middleware/auth')
 const refresh_access_token = require('../utils/refreshAccessToken')
 
 let credentials = {
-    clientId: 'daa3f493706649d192c579e546334d04',
-    clientSecret: '74f77af1b7674593ac2922ee70ad6ffb',
-    redirectUri: 'http://localhost:3000/callback',
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    redirectUri: process.env.REDIRECT_URI,
 }
 let loggedInSpotifyApi = new SpotifyWebApi(credentials)
 
